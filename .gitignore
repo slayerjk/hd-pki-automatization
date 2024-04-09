@@ -1,0 +1,9 @@
+.idea/
+.venv/
+downloads/
+logs/
+app_scripts/__pycache__
+data_files/data-test.json
+data_files/mailing_data.json
+test-playwright.py
+test_etc.py

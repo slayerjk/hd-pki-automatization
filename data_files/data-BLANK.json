@@ -1,0 +1,7 @@
+{
+  "hd-api-url": "https://<HD URL>",
+  "hd-access-key": "<HD API KEY>",
+  "pki-url": "https://<PKI SERVER URL>",
+  "pki-user": "<PKI USER>",
+  "pki-pass": "<PKI USER'S PASS>"
+}
