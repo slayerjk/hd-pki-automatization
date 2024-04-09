@@ -2,7 +2,7 @@
 .venv/
 downloads/
 logs/
-app_scripts/__pycache__
+app_scripts/__pycache__/
 *.pyc
 data_files/data-test.json
 data_files/mailing_data.json
