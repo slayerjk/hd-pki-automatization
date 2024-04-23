@@ -7,7 +7,7 @@
 import logging
 from datetime import datetime
 import json
-from os import path, mkdir
+from os import path, mkdir, getcwd
 
 # COMMON DATA
 
@@ -19,7 +19,9 @@ appname = 'PKI-Auto'
 By default script uses script's location dir.
 If you need custom path for script(sensitive) data
 '''
-data_files = 'data_files'
+script_dir = getcwd()
+
+data_files = f'{script_dir}/data_files'
 
 # SET TIME TO
 start_date_n_time = datetime.now()
@@ -31,7 +33,7 @@ start_date = start_date_n_time.strftime('%d-%m-%Y')
 '''
 By default script uses script's location dir.
 '''
-logs_dir = 'logs'
+logs_dir = f'{script_dir}/logs'
 
 # CHECK LOGS DIR EXIST/CREATE
 if not path.isdir(logs_dir):
@@ -76,9 +78,14 @@ with open(mailing_data, encoding='utf-8') as file:
     mail_list_users = data['list_users']
 
 # VA PROJECT REGARDING DATA
-downloads_dir = 'downloads'
+downloads_dir = f'{script_dir}/downloads'
 
-script_data = f'{data_files}/data-test.json'
+# TEST
+# script_data = f'{data_files}/data-test.json'
+
+# PROD
+script_data = f'{data_files}/data-prod.json'
+
 with open(script_data, encoding='utf-8') as file:
     data = json.load(file)
     hd_api_url = data['hd-api-url']
