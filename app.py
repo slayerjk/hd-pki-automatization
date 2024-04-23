@@ -54,7 +54,7 @@ OTHER CODE GOES HERE
 """
 user_report.write(f'{appname}: {str(start_date_n_time)}\n')
 user_report.write('----------------------------\n')
-exit()
+
 # # GET NEW HD REQUESTS
 logging.info(f'STARTED: getting hd requests dataIDs')
 try:

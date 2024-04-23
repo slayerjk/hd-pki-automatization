@@ -7,7 +7,7 @@
 import logging
 from datetime import datetime
 import json
-from os import path, mkdir, getcwd
+from os import path, mkdir
 
 # COMMON DATA
 
@@ -19,7 +19,7 @@ appname = 'PKI-Auto'
 By default script uses script's location dir.
 If you need custom path for script(sensitive) data
 '''
-script_dir = getcwd()
+script_dir = path.dirname(path.realpath(__file__))
 
 data_files = f'{script_dir}/data_files'
 
