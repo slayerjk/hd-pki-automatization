@@ -216,8 +216,8 @@ else:
 #      'Cert Type': 'Внутренний сертификат',
 #      'Cert Format': '*.cer/*.crt',
 #      'Template': 'SSL',
-#      'Domain': 'cbank.kz',
-#      'CSR file': 'new-pki-bank.bank.corp.centercredit.kz.csr',
+#      'Domain': 'c***.***',
+#      'CSR file': 'new-pki.***.csr',
 #      'CSR FileID': 'file$593805516',
 #      'CSR Body': '-----BEGIN CERTIFICATE REQUEST-----'}
 # ]
@@ -270,11 +270,11 @@ else:
 #      'Cert Type': 'Внутренний сертификат',
 #      'Cert Format': '*.cer/*.crt',
 #      'Template': 'SSL',
-#      'Domain': 'cbank.kz',
-#      'CSR file': 'new-pki-bank.bank.corp.centercredit.kz.csr',
+#      'Domain': 'c***.***',
+#      'CSR file': 'new-pki.***.csr',
 #      'CSR FileID': 'file$593805516',
 #      'CSR Body': '-----BEGIN CERTIFICATE REQUEST-----\n',
-#      'Cert filepath': 'downloads/new-pki-bank.bank.corp.centercredit.kz.cer'}
+#      'Cert filepath': 'downloads/new-pki.***.cer'}
 # ]
 
 # TAKE RESONSIBILITY ON REQUEST & ATTACH CERT FILE TO REQUEST
@@ -342,12 +342,3 @@ files_rotate(logs_dir, logs_to_keep)
 
 # (func_decor('sending Script Final LOG')(send_mail_report)
 #     (appname, mail_list_admins, smtp_from_addr, smtp_server, smtp_port, log_file=app_log_name, report='f'))
-
-
-# # TEST DATA
-# req = {
-#     'Title': 'RP1707946',
-#     'ServiceCall': 'serviceCall$594953976'
-# }
-# set_wait_for_accept(hd_request_resolve_url, proxies, req['ServiceCall'], req['Title'], hd_access_key)
-# time.sleep(60)

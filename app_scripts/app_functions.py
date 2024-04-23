@@ -82,10 +82,10 @@ def get_request_details(url: str, proxy: dict, uuid: str, key: str) -> dict:
     response exmaple:
         "sumDescription": "<font color=\"#5f5f5f\">Описание для каких систем/сервисов нужен сертификат:: <b>ыфывыф</b>
         </font><br><font color=\"#5f5f5f\">Выберите тип сертификата: <b>Внешний сертификат</b></font><br>
-        <font color=\"#5f5f5f\">Ответственный ФИО: <b>Азизжан Имрамзаев</b></font><br><font color=\"#5f5f5f\">
-        Замещающий ФИО: <b>Герцен Михаил Иванович</b></font><br><font color=\"#5f5f5f\">DNS имя: <b>
+        <font color=\"#5f5f5f\">Ответственный ФИО: <b>А*** И***</b></font><br><font color=\"#5f5f5f\">
+        Замещающий ФИО: <b>Г*** М*** И***</b></font><br><font color=\"#5f5f5f\">DNS имя: <b>
         123123ыфвфывавы</b></font><br><font color=\"#5f5f5f\">
-        CSR запрос (вложить при наличии): <b>new-pki-bank.bank.corp.centercredit.kz.csr</b></font><br>
+        CSR запрос (вложить при наличии): <b>new-pki.***.csr</b></font><br>
         <font color=\"#5f5f5f\">Укажите в каких форматах необходимо выпустить сертификат::
         <b>Key +*.cer/*crt</b></font><br>",
 
@@ -95,8 +95,8 @@ def get_request_details(url: str, proxy: dict, uuid: str, key: str) -> dict:
         'Cert Type': 'Внутренний сертификат',
         'Cert Format': '*.cer/*.crt', # OR may be '*.pem'
         'Template': 'SSL',
-        'Domain': 'cbank.kz',
-        'CSR file': 'new-pki-bank.bank.corp.centercredit.kz.csr',
+        'Domain': 'c***.***',
+        'CSR file': 'new-pki.***.csr',
         'CSR FileID': 'file$593805516',}
     """
     result = dict()
@@ -225,8 +225,8 @@ def create_cert(url: str, user: str, password: str, req: dict, downloads: str, p
          'Cert Type': 'Внутренний сертификат',
          'Cert Format': '*.cer/*.crt', # OR may be '*.pem'
          'Template': 'SSL',
-         'Domain': 'cbank.kz',
-         'CSR file': 'new-pki-bank.bank.corp.centercredit.kz.csr',
+         'Domain': 'c***.***',
+         'CSR file': 'new-pki.***.csr',
          'CSR FileID': 'file$593805516',
          'CSR Body': '-----BEGIN CERTIFICATE REQUEST-----\nMIIDNzC....5NLPmx88M=\n-----END CERTIFICATE REQUEST-----\n'}
 
@@ -236,7 +236,7 @@ def create_cert(url: str, user: str, password: str, req: dict, downloads: str, p
         "",
         # headless=False,
         headless=True,
-        slow_mo=1000,
+        # slow_mo=1000,
         http_credentials={
             "username": user,
             "password": password
