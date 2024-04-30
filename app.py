@@ -165,8 +165,8 @@ else:
     (func_decor('sending user report')(send_mail_report)
      (appname, mail_list_users, smtp_from_addr, smtp_server, smtp_port, mail_body=user_report.read()))
 
-    (func_decor('sending Script Final LOG')(send_mail_report)
-        (appname, mail_list_admins, smtp_from_addr, smtp_server, smtp_port, log_file=app_log_name, report='e'))
+    # (func_decor('sending Script Final LOG')(send_mail_report)
+    #     (appname, mail_list_admins, smtp_from_addr, smtp_server, smtp_port, log_file=app_log_name, report='e'))
     files_rotate(logs_dir, logs_to_keep)
     exit()
 
