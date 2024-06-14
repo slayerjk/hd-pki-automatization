@@ -1,11 +1,17 @@
-.idea/
-.venv/
-downloads/
-logs/
-app_scripts/__pycache__/
-*.pyc
-data_files/data-test.json
-data_files/data-prod.json
-data_files/mailing_data.json
-test-playwright.py
-test_etc.py
+# ignore all
+*
+
+# except
+!app_scripts/app_functions.py
+!app_scripts/project_mailing.py
+!app_scripts/project_helper.py
+
+!data_files/BLANK_mailing_data.json
+!data_files/BLANK_data.json
+
+!app.py
+!project_static.py
+
+!.gitignore
+!README.md
+!requirements.txt
