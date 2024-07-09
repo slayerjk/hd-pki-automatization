@@ -7,15 +7,39 @@ import re
 import urllib3
 
 # IMPORT PROJECTS PARTS
-from project_static import appname, start_date_n_time, logging, logs_dir, logs_to_keep, data_files, \
-    hd_access_key, hd_api_get_list_url, hd_request_get_data_url, hd_request_get_details_url, \
-    hd_request_get_csr_url, pki_url, pki_user, pki_pass, script_data, proxies, downloads_dir, \
-    hd_request_attach_file_url, hd_request_take_responsibility_url, hd_request_resolve_url
+from project_static import (
+    appname,
+    start_date_n_time,
+    logging,
+    logs_dir,
+    logs_to_keep,
+    data_files,
+    hd_access_key,
+    hd_api_get_list_url,
+    hd_request_get_data_url,
+    hd_request_get_details_url,
+    hd_request_get_csr_url,
+    pki_url,
+    pki_user,
+    pki_pass,
+    script_data,
+    proxies,
+    downloads_dir,
+    hd_request_take_responsibility_url,
+    hd_request_resolve_url
+)
 
 from app_scripts.project_helper import files_rotate, check_create_dir, func_decor, check_file
 
-from app_scripts.app_functions import get_hd_requests, get_request_service_call, get_request_details, get_request_csr, \
-    create_cert, attach_file_to_request, take_request_responsiblity, set_wait_for_accept
+from app_scripts.app_functions import (
+    get_hd_requests,
+    get_request_service_call,
+    get_request_details,
+    get_request_csr,
+    create_cert,
+    take_request_responsiblity,
+    attach_sert_n_set_wait_for_accept
+)
 
 # MAILING IMPORTS(IF YOU NEED)
 from project_static import smtp_server, smtp_port, smtp_from_addr, mail_list_admins, mail_list_users, app_log_name
@@ -248,7 +272,7 @@ if len(final_requests_details) > 0:
 
     user_report.write(f'Создано сертификатов: {len(final_requests_details)}/{len(requests_details_w_csr)}\n\n')
     user_report.write('Список созданных сертификатов:\n')
-    [print(re.match(r'.*?/(.*)', i['Cert filepath']).group(1), file=user_report) for i in final_requests_details]
+    [print(re.match(r'.*/(.*)', i['Cert filepath']).group(1), file=user_report) for i in final_requests_details]
     user_report.write('\n')
 else:
     logging.error(f'NO CERTS TO PROCESS FURTHER, exiting')
@@ -293,27 +317,38 @@ for req in final_requests_details:
         logging.info(f'STARTED: attaching cert to {req["Title"]}')
         # ATTACH CERT TO REQ
         time.sleep(5)
+
+        # DEPRECATED SINCE FILE IS ATTACHED WHILE SETTING FOR ACCEPTANCE
+        # try:
+        #     (attach_file_to_request
+        #      (hd_request_attach_file_url, proxies, req['Cert filepath'], req['ServiceCall'], hd_access_key))
+        # except Exception as e:
+        #     logging.warning(f'FAILED: attaching cert to {req["Title"]}\n{e}\n')
+        #     user_report.write(f'{req["Title"]}: загрузка сертификата в тикет - ОШИБКА\n')
+        # else:
+        #     logging.info(f'DONE: attaching cert to {req["Title"]}\n')
+        #     user_report.write(f'{req["Title"]}: загрузка сертификата в тикет - ОК\n')
+        #     logging.info(f'STARTED: setting wait for acceptance status {req["Title"]}')
+
+        # ATTACHING CERT FILE & SET WAIT FOR ACCEPT
+        time.sleep(5)
         try:
-            (attach_file_to_request
-             (hd_request_attach_file_url, proxies, req['Cert filepath'], req['ServiceCall'], hd_access_key))
+            (attach_sert_n_set_wait_for_accept
+             (hd_request_resolve_url,
+              proxies,
+              req['Cert filepath'],
+              req['ServiceCall'],
+              req['Title'],
+              hd_access_key)
+             )
         except Exception as e:
-            logging.warning(f'FAILED: attaching cert to {req["Title"]}\n{e}\n')
-            user_report.write(f'{req["Title"]}: загрузка сертификата в тикет - ОШИБКА\n')
+            logging.warning(f'FAILED: setting wait for acceptance status {req["Title"]}\n{e}\n')
+            user_report.write(f'{req["Title"]}: '
+                              f'Прикепление сертификатаустановка тикета в статус "ожидает подтверждения" - ОШИБКА\n')
         else:
-            logging.info(f'DONE: attaching cert to {req["Title"]}\n')
-            user_report.write(f'{req["Title"]}: загрузка сертификата в тикет - ОК\n')
-            logging.info(f'STARTED: setting wait for acceptance status {req["Title"]}')
-            # SET WAIT FOR ACCEPT
-            time.sleep(5)
-            try:
-                (set_wait_for_accept
-                 (hd_request_resolve_url, proxies, req['ServiceCall'], req['Title'], hd_access_key))
-            except Exception as e:
-                logging.warning(f'FAILED: setting wait for acceptance status {req["Title"]}\n{e}\n')
-                user_report.write(f'{req["Title"]}: установка тикета в статус "ожидает подтверждения" - ОШИБКА\n')
-            else:
-                logging.info(f'DONE: setting wait for acceptance status {req["Title"]}\n')
-                user_report.write(f'{req["Title"]}: установка тикета в статус "ожидает подтверждения" - ОК\n')
+            logging.info(f'DONE: setting wait for acceptance status {req["Title"]}\n')
+            user_report.write(f'{req["Title"]}: '
+                              f'Прикепление сертификата и установка тикета в статус "ожидает подтверждения" - ОК\n')
     finally:
         # SLEEP TO WAIT ALL ACCEPTANCE IS REFRESHED IN HD
         logging.info('STARTED: Waiting a min to make HD refreshed...')

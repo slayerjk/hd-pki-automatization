@@ -332,6 +332,8 @@ def take_request_responsiblity(url: str, proxy: dict, uuid: str, key: str) -> No
 # ATTACH FILE TO REQUEST
 def attach_file_to_request(url: str, proxy: dict, file: str, uuid: str, key: str) -> None:
     """
+    !DEPRECATED, USE attach_sert_n_set_wait_for_accept!
+
     (HD API)Attaching cert to HD Request
 
     :param url: str, hd get csr url
@@ -356,17 +358,27 @@ def attach_file_to_request(url: str, proxy: dict, file: str, uuid: str, key: str
 
 
 # SET WAIT FOR ACCEPT
-def set_wait_for_accept(url: str, proxy: dict, servicecall: str, rp: str, key: str) -> None:
+def attach_sert_n_set_wait_for_accept(
+        url: str,
+        proxy: dict,
+        cert_path: str,
+        servicecall: str,
+        rp: str,
+        key: str
+) -> None:
     """
-    (HD API)Set "wait for approvement"
+    (HD API)Attach cert file and Set "wait for approvement"
+
     :param url: str, hd url
     :param proxy: dict, proxy
+    :param cert_path: str, path of cert file
     :param servicecall: str, requests serviceCall
     :param rp: str, request's title(RP*)
     :param key: str, access key
     :return: str
     """
     payload = {
+        'form-data': open(cert_path, 'rb'),
         'procCodeClose': (None, 'catalogs$549821603'),
         'solution': (None, f'Запрос {rp} исполнен, сертификат во вложении.\nНа подтверждении в дирекции мониторинга.')
     }

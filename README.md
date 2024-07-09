@@ -25,10 +25,9 @@ Main libs to use:
    13. SELECT "Base 64 encoded" RADIO
    14. DOWNLOAD CERTIFICATE(cer/pem) - downloads dir in script's dir
 15. take_request_responsiblity - (HD API)Take Responsibility on Request
-16. attach_file_to_request - (HD API)Attaching cert to HD Request
-17. set_wait_for_accept - (HD API)Set "wait for approvement"
-18. send user report 
-19. logs rotation
+16. attach_sert_n_set_wait_for_accept - (HD API)Attach cert file and Set "wait for approvement"
+17. send user report 
+18. logs rotation
 
 **Additional workflow(mailing):**
 * send report to users(list) (OPTIONAL)
