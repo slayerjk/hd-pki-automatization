@@ -1,4 +1,4 @@
-This is a PKI automatization script for using with HD Naumen API and Windows PKI(CA) server.
+_This is a PKI automatization script for using with HD Naumen API and Windows PKI(CA) server.
 
 **DESCRIPTION**:
 Check workflow
@@ -15,15 +15,15 @@ Main libs to use:
 3. get_request_details - (HD API)Getting Requests Details
 4. get_request_csr - (HD API)Getting HD Request's File(CSR)
 5. create_cert - (CA server, Playwright)Create certificate via MS CA server (**check carefully function for your logic**)
-   6. go to the ca url
-   7. CLICK "Request a certificate" LINK
-   8. CLICK "Submit a certificate request..." LINK
-   9. FILL TEXTFIELD WITH CSR BODY
-   10. SELECT CORRESPONDING TEMPLATE(**check this function, because your templates might differ**)
-   11. CLICK SUBMIT
-   12. EXPECT PAGE WITH NO ERROR("Certificate Issues")
-   13. SELECT "Base 64 encoded" RADIO
-   14. DOWNLOAD CERTIFICATE(cer/pem) - downloads dir in script's dir
+6. go to the ca url
+7. CLICK "Request a certificate" LINK
+8. CLICK "Submit a certificate request..." LINK
+9. FILL TEXTFIELD WITH CSR BODY
+10. SELECT CORRESPONDING TEMPLATE(**check this function, because your templates might differ**)
+11. CLICK SUBMIT
+12. EXPECT PAGE WITH NO ERROR("Certificate Issues")
+13. SELECT "Base 64 encoded" RADIO
+14. DOWNLOAD CERTIFICATE(cer/pem) - downloads dir in script's dir
 15. take_request_responsiblity - (HD API)Take Responsibility on Request
 16. attach_sert_n_set_wait_for_accept - (HD API)Attach cert file and Set "wait for approvement"
 17. send user report 
@@ -43,4 +43,4 @@ Main libs to use:
 * data_files/mailing_data.json - mailing data
 
 **WARNING**:
-Script uses data_files/data.json and data/files/mailing_data.json. Rename BLANK files correspondenly.
+Script uses data_files/data.json and data/files/mailing_data.json. Rename BLANK files correspondenly._
