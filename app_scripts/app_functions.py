@@ -277,10 +277,9 @@ def create_cert(url: str, user: str, password: str, req: dict, downloads: str, p
     page.locator('#rbB64Enc').check()
 
     # DOWNLOAD CERTIFICATE(cer/pem)
-    try:
-        cert_name = re.search(r'(.*)\.\w+$', req['CSR file']).group(1)
-    except AttributeError as e:
-        raise Exception(f'FAILED TO GET CERT FILE NAME FROM {req["CSR file"]}\n{e}\n')
+    cert_name = req['CSR file']
+    if len(cert_name) == 0:
+        cert_name = 'certificate'
 
     if '.cer' in req['Cert Format']:
         cert_format = 'cer'
