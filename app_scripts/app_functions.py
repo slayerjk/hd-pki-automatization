@@ -279,7 +279,7 @@ def create_cert(url: str, user: str, password: str, req: dict, downloads: str, p
     # DOWNLOAD CERTIFICATE(cer/pem)
     cert_name = req['CSR file']
     if len(cert_name) == 0:
-        cert_name = 'certificate'
+        cert_name = 'result'
 
     if '.cer' in req['Cert Format']:
         cert_format = 'cer'
