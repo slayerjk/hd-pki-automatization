@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+import os
+import shutil
 import time
 from tempfile import TemporaryFile
 from time import perf_counter
+from pathlib import Path
 from playwright.sync_api import sync_playwright
 import re
 import urllib3
@@ -359,6 +362,17 @@ for req in final_requests_details:
         user_report.write(f'PKI-Auto: работа программы завершена!\n')
         user_report.write(f'Затрачено вермени(s): {perf_counter() - start_time_counter}\n')
 
+# CLEARING DOWNLOADS DIR
+logging.info('STARTED: clearing downloads dir')
+try:
+    for root, _, files in os.walk(downloads_dir):
+        for filename in files:  # loop through files in the current directory
+            path_to_del = os.path.join(root, filename)
+            os.remove(path_to_del)
+except Exception as e:
+    logging.warning(f'FAILED: clearing downloads dir:\n\t{e}')
+else:
+    logging.info('DONE: clearing downloads dir')
 
 # SENDING FINAL USER REPORT
 user_report.seek(0)
