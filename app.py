@@ -32,7 +32,7 @@ from project_static import (
     hd_request_resolve_url
 )
 
-from app_scripts.project_helper import files_rotate, check_create_dir, func_decor, check_file
+from app_scripts.project_helper import files_rotate, check_create_dir, func_decor, check_file, clear_dir
 
 from app_scripts.app_functions import (
     get_hd_requests,
@@ -81,6 +81,9 @@ OTHER CODE GOES HERE
 """
 user_report.write(f'{appname}: {str(start_date_n_time)}\n')
 user_report.write('----------------------------\n')
+
+# CLEARING DOWNLOADS DIR
+func_decor('clearing downloads dir', 'warn')(clear_dir)(downloads_dir)
 
 # # GET NEW HD REQUESTS
 logging.info(f'STARTED: getting hd requests dataIDs')
@@ -362,25 +365,15 @@ for req in final_requests_details:
         user_report.write(f'PKI-Auto: работа программы завершена!\n')
         user_report.write(f'Затрачено вермени(s): {perf_counter() - start_time_counter}\n')
 
-# CLEARING DOWNLOADS DIR
-logging.info('STARTED: clearing downloads dir')
-try:
-    for root, _, files in os.walk(downloads_dir):
-        for filename in files:  # loop through files in the current directory
-            path_to_del = os.path.join(root, filename)
-            os.remove(path_to_del)
-except Exception as e:
-    logging.warning(f'FAILED: clearing downloads dir:\n\t{e}')
-else:
-    logging.info('DONE: clearing downloads dir')
-
 # SENDING FINAL USER REPORT
 user_report.seek(0)
 (func_decor('sending user report')(send_mail_report)
  (appname, mail_list_users, smtp_from_addr, smtp_server, smtp_port, mail_body=user_report.read()))
 
-
 # POST-WORK PROCEDURES
+
+# CLEARING DOWNLOADS DIR
+func_decor('clearing downloads dir', 'warn')(clear_dir)(downloads_dir)
 
 # FINISH JOBS
 logging.info('#########################')

@@ -8,7 +8,7 @@ Various Helper functions:
  """
 
 from pathlib import Path
-from os import remove, mkdir, path
+from os import remove, mkdir, path, walk
 from project_static import logging
 
 
@@ -95,3 +95,18 @@ def check_create_dir(dir_path):
     """
     if not path.isdir(dir_path):
         mkdir(dir_path)
+
+
+# REMOVE ALL FILES IN DIR
+# CLEARING DOWNLOADS DIR
+def clear_dir(dir_path):
+    """
+        Remove all files and files in subdirs in given 'path'
+
+        Args:
+            dir_path: path to dir
+    """
+    for root, _, files in walk(dir_path):
+        for filename in files:  # loop through files in the current directory
+            path_to_del = path.join(root, filename)
+            remove(path_to_del)
