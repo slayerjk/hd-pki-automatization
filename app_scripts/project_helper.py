@@ -97,7 +97,6 @@ def check_create_dir(dir_path):
         mkdir(dir_path)
 
 
-# REMOVE ALL FILES IN DIR
 # CLEARING DOWNLOADS DIR
 def clear_dir(dir_path):
     """
