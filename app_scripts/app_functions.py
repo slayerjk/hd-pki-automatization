@@ -207,10 +207,11 @@ def get_request_csr(url: str, proxy: dict, fileid: str, key: str) -> str:
 
 
 # CREATING CERT FILE
-def create_cert(url: str, user: str, password: str, req: dict, downloads: str, playwright: Playwright) -> str:
+def create_cert(templates: dict, url: str, user: str, password: str, req: dict, downloads: str, playwright: Playwright) -> str:
     """
     (CA server, Playwright)Create certificate via MS CA server
 
+    :param templates: dict of corresponding keys(HD values) and values(PKI templates)
     :param url: url of PKI server
     :param user: username to auth on PKI server
     :param password: password to auth on PKI server
@@ -260,16 +261,23 @@ def create_cert(url: str, user: str, password: str, req: dict, downloads: str, p
     page.locator('#locTaRequest').fill(req['CSR Body'])
 
     # SELECT CORRESPONDING TEMPLATE
-    if req['Template'] == 'SSL':
-        # page.locator('#lbCertTemplateID').select_option(label="23https/ssl")
-        # upd 21.04.25: replace '23Web Client and Server' with 'https_2 years'
-        page.locator('#lbCertTemplateID').select_option(label="https_2 years")
-    elif req['Template'] == 'Ldaps for pam':
-        page.locator('#lbCertTemplateID').select_option(label="23LDAPS_for_PAM")
-    elif req['Template'] == 'Web client and server':
-        page.locator('#lbCertTemplateID').select_option(label='23Web Client and Server')
-    else:
+    try:
+        template = templates[req['Template']]
+    except KeyError:
         raise Exception(f'TEMPLATE NOT IN LIST, CHECK TEMPLATE TYPE({req["Template"]})')
+    else:
+        page.locator('#lbCertTemplateID').select_option(label=template)
+
+    # if req['Template'] == 'SSL':
+    #     # page.locator('#lbCertTemplateID').select_option(label="23https/ssl")
+    #     # upd 21.04.25: replace '23Web Client and Server' with 'https_2 years'
+    #     page.locator('#lbCertTemplateID').select_option(label="https_2 years")
+    # elif req['Template'] == 'Ldaps for pam':
+    #     page.locator('#lbCertTemplateID').select_option(label="23LDAPS_for_PAM")
+    # elif req['Template'] == 'Web client and server':
+    #     page.locator('#lbCertTemplateID').select_option(label='23Web Client and Server')
+    # else:
+    #     raise Exception(f'TEMPLATE NOT IN LIST, CHECK TEMPLATE TYPE({req["Template"]})')
 
     # CLICK SUBMIT
     page.locator('#btnSubmit').click()

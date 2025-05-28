@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-import os
-import shutil
+import json
 import time
 from tempfile import TemporaryFile
 from time import perf_counter
-from pathlib import Path
 from playwright.sync_api import sync_playwright
 import re
 import urllib3
@@ -17,6 +15,7 @@ from project_static import (
     logs_dir,
     logs_to_keep,
     data_files,
+    templates_data_file,
     hd_access_key,
     hd_api_get_list_url,
     hd_request_get_data_url,
@@ -70,6 +69,7 @@ func_decor(f'checking {data_files} dir exists and create if not')(check_create_d
 
 # CHECKING DATA DIRS & FILES
 func_decor(f'checking {script_data} file exist', 'crit')(check_file)(script_data)
+func_decor(f'checking {templates_data_file} file exist', 'crit')(check_file)(templates_data_file)
 func_decor(f'checking {downloads_dir} dir exist/create', 'crit')(check_create_dir)(downloads_dir)
 
 
@@ -84,6 +84,10 @@ user_report.write('----------------------------\n')
 
 # CLEARING DOWNLOADS DIR
 func_decor('clearing downloads dir', 'warn')(clear_dir)(downloads_dir)
+
+# FORMING TEMPLATES DATA
+with open(templates_data_file, 'r', encoding='utf-8') as file:
+    templates_data = json.load(file)
 
 # # GET NEW HD REQUESTS
 logging.info(f'STARTED: getting hd requests dataIDs')
@@ -259,7 +263,7 @@ for req in requests_details_w_csr:
     logging.info(f'STARTED: creating cert for {req["Title"]}')
     with sync_playwright() as playwright:
         try:
-            cert_path = create_cert(pki_url, pki_user, pki_pass, req, downloads_dir, playwright)
+            cert_path = create_cert(templates_data, pki_url, pki_user, pki_pass, req, downloads_dir, playwright)
         except Exception as e:
             logging.warning(f'FAILED: creating cert for {req["Title"]}, \n{e}, \nskipping\n')
         else:

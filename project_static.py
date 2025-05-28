@@ -85,6 +85,7 @@ downloads_dir = f'{script_dir}/downloads'
 
 # PROD
 script_data = f'{data_files}/data-prod.json'
+templates_data_file = f'{data_files}/hd_pki-templates.json'
 
 with open(script_data, encoding='utf-8') as file:
     data = json.load(file)
