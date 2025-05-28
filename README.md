@@ -1,6 +1,6 @@
 This is a PKI automatization script for using with HD Naumen API and Windows PKI(CA) server.
 
-**Used only for Russian version of Windows PKI server**
+**Use only for Russian version of Windows PKI server**
 
 **DESCRIPTION**:
 Check workflow
