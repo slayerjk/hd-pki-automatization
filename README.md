@@ -52,7 +52,7 @@ Main libs to use:
   "pki-pass": "<PKI USER'S PASS>"
 }
 ```
-There is 'data-BLANK.json' example file. Edit it and rename to 'data-prod.json'
+! There is 'data-BLANK.json' example file. Edit it and rename to 'data-prod.json'
 
 **data_files/hd_pki-templates.json example**
 ```
@@ -63,4 +63,4 @@ There is 'data-BLANK.json' example file. Edit it and rename to 'data-prod.json'
 }
 ```
 
-There is 'hd_pki-templates_BLANK.json' example file. Edit it and rename to 'hd_pki-templates.json'
+! There is 'hd_pki-templates_BLANK.json' example file. Edit it and rename to 'hd_pki-templates.json'
