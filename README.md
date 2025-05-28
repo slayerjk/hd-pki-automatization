@@ -42,5 +42,25 @@ Main libs to use:
 * app_scripts/app_functions.py - application regarding functions
 * data_files/mailing_data.json - mailing data
 
-**WARNING**:
-Script uses data_files/data.json and data/files/mailing_data.json. Rename BLANK files correspondenly._
+**data_files/data-prod.json example**
+```
+{
+  "hd-api-url": "https://<HD URL>",
+  "hd-access-key": "<HD API KEY>",
+  "pki-url": "https://<PKI SERVER URL>",
+  "pki-user": "<PKI USER>",
+  "pki-pass": "<PKI USER'S PASS>"
+}
+```
+There is 'data-BLANK.json' example file. Edit it and rename to 'data-prod.json'
+
+**data_files/hd_pki-templates.json example**
+```
+{
+  "HD_Field1": "PKI_Template-1",
+  "HD_Field2": "PKI_Template-2",
+  "HD_Field3": "PKI_Template-3"
+}
+```
+
+There is 'hd_pki-templates_BLANK.json' example file. Edit it and rename to 'hd_pki-templates.json'
