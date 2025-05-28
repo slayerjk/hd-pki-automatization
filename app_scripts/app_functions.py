@@ -241,7 +241,9 @@ def create_cert(url: str, user: str, password: str, req: dict, downloads: str, p
             "username": user,
             "password": password
         },
-        ignore_https_errors=True
+        ignore_https_errors=True,
+        # default timeout is 30000ms(30s)
+        timeout=40000
     )
 
     page = context.new_page()
