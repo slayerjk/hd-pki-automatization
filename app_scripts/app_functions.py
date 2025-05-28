@@ -260,7 +260,7 @@ def create_cert(templates: dict, url: str, user: str, password: str, req: dict, 
     # FILL TEXTFIELD WITH CSR BODY
     page.locator('#locTaRequest').fill(req['CSR Body'])
 
-    # SELECT CORRESPONDING TEMPLATE
+    # SELECT CORRESPONDING PKI TEMPLATE BASED ON HD RESPONSE
     try:
         template = templates[req['Template']]
     except KeyError:
