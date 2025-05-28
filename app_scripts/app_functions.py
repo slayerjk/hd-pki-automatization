@@ -268,17 +268,6 @@ def create_cert(templates: dict, url: str, user: str, password: str, req: dict, 
     else:
         page.locator('#lbCertTemplateID').select_option(label=template)
 
-    # if req['Template'] == 'SSL':
-    #     # page.locator('#lbCertTemplateID').select_option(label="23https/ssl")
-    #     # upd 21.04.25: replace '23Web Client and Server' with 'https_2 years'
-    #     page.locator('#lbCertTemplateID').select_option(label="https_2 years")
-    # elif req['Template'] == 'Ldaps for pam':
-    #     page.locator('#lbCertTemplateID').select_option(label="23LDAPS_for_PAM")
-    # elif req['Template'] == 'Web client and server':
-    #     page.locator('#lbCertTemplateID').select_option(label='23Web Client and Server')
-    # else:
-    #     raise Exception(f'TEMPLATE NOT IN LIST, CHECK TEMPLATE TYPE({req["Template"]})')
-
     # CLICK SUBMIT
     page.locator('#btnSubmit').click()
 
