@@ -52,7 +52,7 @@ logging_datefmt = '%d-%b-%Y %H:%M:%S'
 a - for "append" to the end of file
 w - create new/rewrite exist
 '''
-log_filemode = 'w'
+log_filemode = 'a'
 
 # LOGS TO KEEP AFTER ROTATION
 logs_to_keep = 30
